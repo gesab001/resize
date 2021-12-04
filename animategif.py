@@ -13,13 +13,7 @@ for f_name in os.listdir('./input/'):
          timestamp  = os.path.getmtime(path)
          timestamplist.append(timestamp)
          timestampdic[timestamp] = path
-         source = "./input/" + f_name
-         dest = "./output/" + str(count) + ".png"
 
-         #os.rename(source, dest)
-         #command = "convert -delay 20 *.png -loop 0 movie.gif"
-         #subprocess.call(command, shell=True)
-         count = count + 1
 
 print(timestamplist)
 timestamplist.sort()
@@ -38,5 +32,11 @@ for x in timestamplist:
   
 finish_flag = True
 if finish_flag:
+  finish_flag = False
   subprocess.call("apngasm ./complete/output.png ./output/*.png 3 4", shell=True)
+  finish_flag = True
 
+if finish_flag:
+  finish_flag = False
+  subprocess.call("rm ./output/*.png", shell=True)
+  finish_flag = True
